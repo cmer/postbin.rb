@@ -26,7 +26,7 @@
         =distance_of_time_in_words post[:time], Time.now
         ago
         
-      %pre= post[:data]
+      %pre= h post[:data]
       
       %a{:href=>"#", :id=>"headers_link_#{post_id}", :onClick=>"$('#headers_#{post_id}').show();$('#headers_link_#{post_id}').hide();return false;"} Show headers
       .headers(id="headers_#{post_id}")
