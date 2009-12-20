@@ -70,6 +70,9 @@ class Sinatra::Request
 end
 
 helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+  
   def distance_of_time_in_words(from_time, to_time=Time.now)
     diff = (from_time - to_time).abs
     if diff < 60
