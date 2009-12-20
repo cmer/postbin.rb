@@ -9,19 +9,20 @@ get '/' do
   haml :welcome, :locals => { :postbin_name => generate_postbin_name }
 end
 
-get '/posts/:id' do
-  haml :show_posts, :locals => { :posts => (@@storage[params[:id]] || {})[:posts] }
-end
-
-post '/posts/:id' do
-  store_post(params[:id])
-  haml :post_created, :locals => { :name => params[:id] }
-end
-
 get '/stylesheet.css' do
   headers 'Content-Type' => 'text/css; charset=utf-8'
   sass :stylesheet
 end
+
+get '/:id' do
+  haml :show_posts, :locals => { :posts => (@@storage[params[:id]] || {})[:posts] }
+end
+
+post '/:id' do
+  store_post(params[:id])
+  haml :post_created, :locals => { :name => params[:id] }
+end
+
 
 get '/flash/clippy.swf' do
   send_file "#{Sinatra::Application.root}/flash/clippy.swf", :disposition => 'inline', :type => 'application/x-shockwave-flash'
@@ -38,7 +39,7 @@ def create_postbin
 end
 
 def generate_postbin_name
-  Digest::MD5.hexdigest("#{Time.now}#{Time.now.usec}")
+  Digest::MD5.hexdigest("#{Time.now}#{Time.now.usec}")[0..6]
 end
 
 def store_post(name)
