@@ -1,0 +1,10 @@
+%p.explain 
+  Postbin.rb lets you 
+  %strong debug web hooks 
+  by capturing and logging the asynchronous requests made when events happen. Make a PostBin and register the URL with a web hook provider. 
+  %strong All POST requests to the URL are logged
+  for you to see when you browse to that URL.
+
+%form(action="/posts/#{postbin_name}")
+  %input(type="submit" value="Create a new PostBin")
+

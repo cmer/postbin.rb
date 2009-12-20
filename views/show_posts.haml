@@ -1,0 +1,48 @@
+- auto_refresh = 15
+%meta(http-equiv="refresh" content="#{auto_refresh}")
+
+- if posts.nil?
+  %h2 
+    No data received for
+    %span.url=request.path
+
+  %p 
+    You need to POST data to 
+    %span.url= request.url
+    = clippy(request.url)
+    
+- else
+  %h2
+    Recently POSTed to
+    %span.url=request.path
+    = clippy(request.url)
+    
+  - posts.reverse.each do |post|
+    - post_id = Digest::MD5.hexdigest(post[:time].to_s)
+    
+    .post(id="post_#{post_id}")
+      .time(title="#{post[:time]}")
+        Posted approximately
+        =distance_of_time_in_words post[:time], Time.now
+        ago
+        
+      %pre= post[:data]
+      
+      %a{:href=>"#", :id=>"headers_link_#{post_id}", :onClick=>"$('#headers_#{post_id}').show();$('#headers_link_#{post_id}').hide();return false;"} Show headers
+      .headers(id="headers_#{post_id}")
+        .title Headers
+        %ul
+          - post[:headers].each_pair do |k, v|
+            %li
+              .key= k
+              .value= v
+
+%p
+  This page will auto-refresh every
+  %span.refresh_delay
+    = auto_refresh
+    seconds.
+  
+:javascript
+  document.write('<form><input type=button value="Refresh" onClick="history.go()"></form>')
+  

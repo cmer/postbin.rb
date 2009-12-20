@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title postbin.rb
+    %link{:rel=>'stylesheet', :href=>'http://yui.yahooapis.com/3.0.0/build/cssreset/reset-min.css', :type => "text/css"}
+    %link{:rel=>'stylesheet', :href=>'http://yui.yahooapis.com/3.0.0/build/cssbase/base-min.css', :type => "text/css"}
+    %link{:rel=>'stylesheet', :href=>'http://yui.yahooapis.com/3.0.0/build/cssfonts/fonts-min.css', :type => "text/css"}
+    %link{:rel=>'stylesheet', :href=>'/stylesheet.css', :type => "text/css"}
+    %script{:src=>'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js', :type => "text/javascript"}
+
+  %body
+    #content
+      %h1.logo
+        %a(href="/") postbin.rb
+      = yield
+
+    #footer
+      Written by
+      %a(href="http://carlmercier.com") Carl Mercier
+      \- Greatly inspired by 
+      %a(href="http://postbin.org") PostBin.org
+      \- This application is written in 
+      %a(href="http://ruby-lang.org") Ruby
+      and is
+      %a(href="http://github.com/cmer/postbinrb") open source.
+      
